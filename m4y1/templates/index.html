@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html> 
+  <head> 
+    <meta charset="UTF-8"> 
+    <link rel="stylesheet" href= "/static/css/style.css">
+    {% block head %}
+        <title>Главная страница</title>
+    {% endblock %}
+  </head> 
+  <body> 
+    <header>
+        <ul>
+          <li><a href="/">Главная страница</a></li>
+          <li><a href="/products">Продукция</a></li>
+          <li><a href="/contacts">Контакты</a></li>
+          <li><a href="/cart">Корзина</a></li>
+          <li><a href="/about">О компании</a></li>
+        </ul>
+    </header>
+    {% block content %}
+        <div class="main">
+            <div class='card'>
+                <a href="/product1">
+                    <img src="/static/images/promotion.png" width="300" height="300">
+                    <p class = "prom">Распродажа!</p>
+                </a>
+            </div>            
+            
+            <div class='card'>
+                <a href="/product2">
+                    <img src="/static/images/promotion.png" width="300" height="300">
+                    <p class = "prom">Распродажа!<p>
+                </a>
+            </div>            
+        </div>
+    {% endblock %}
+  </body> 
+</html> 

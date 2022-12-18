@@ -1,0 +1,18 @@
+.left {
+    float: left;
+    border: double 5px #2c3e50;
+}
+.right {
+    float: right;
+    border: double 5px #2c3e50;
+}
+.text {
+    height: 300px;
+    margin: 5%;
+    padding: 30px;
+    text-align: center;
+}
+
+.text:nth-of-type(even) { /* Каждый четный элемент имеет фоновый цвет #ecf0f1 */
+    background-color: #ecf0f1;
+}

@@ -1,0 +1,8 @@
+.bg-image {
+    /* Настройки картинки */
+    background-image: url('../images/empty.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5; /* Прозрачность картинки */
+    height: 700px;
+}

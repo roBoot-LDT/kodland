@@ -1,0 +1,26 @@
+table {
+    margin: 15px auto; /* Сверху и снизу таблицы отступы 15 пикселей, auto - центрирует таблицу */
+    font-size: 16px;
+    font-family: sans-serif; /* Подключаем красивый шрифт */
+    width: 90%; /* Ширина таблицы относительно всей страницы */
+}
+
+table th,
+table td {
+    padding: 12px 15px; 
+}
+
+table tr
+{ /* Каждый четный элемент имеет фоновый цвет #ecf0f1 */
+
+    color: rgb(238, 255, 0);
+}
+
+
+button {
+    background-color: #c0392b;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+}

@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    background-color: #17909e; /* Цвет фона  */
+}
+header {
+    height: 60px; /* Высота шапки */
+    background-color: #000000; /* Цвет фона  */
+    display: flex; /* Включаем гибкость блока */
+}
+ul {
+    list-style: none; /* Убираем маркеры в списке */
+    display: flex; /* Включаем гибкость блока */
+    justify-content: start; /* Выравниваем по левому краю ссылки */
+}
+  
+li a {
+    color: rgb(0, 0, 0); /* Цвет текста */
+    padding: 22px; /* Создаем поля вокруг ссылок по 22 пикселя */
+    font-size: 20px; /* Размер шрифта */
+    text-decoration: none; /* Убираем подчеркивание ссылок */
+}
+  
+li a:hover {
+    background-color: #2c3e50; /* Цвет фона при наведении на кнопку */
+}

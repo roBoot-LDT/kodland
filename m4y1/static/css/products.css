@@ -1,0 +1,28 @@
+table {
+    margin: 15px auto; /* Сверху и снизу таблицы отступы 15 пикселей, auto - центрирует таблицу */
+    font-size: 16px;
+    font-family: sans-serif; /* Подключаем красивый шрифт */
+    width: 90%; /* Ширина таблицы относительно всей страницы */
+    border: double 5px #2c3e50; /* Создаем двойную границу с толщиной 5 пикселей */
+}
+
+table th,
+table td {
+    padding: 12px 15px; 
+}
+
+table tr:nth-of-type(even) { /* Каждый четный элемент имеет фоновый цвет #ecf0f1 */
+    background-color: #ecf0f1;
+}
+table tr:hover{ /* При наведении на строчку меняем цвет фона и текста */
+    background-color: #95a5a6;
+    color: white;
+}
+
+button {
+    background-color: #c0392b;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+}

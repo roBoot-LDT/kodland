@@ -1,0 +1,7 @@
+.bg-image {
+    background-image: url('../images/cart.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5; /* Прозрачность картинки */
+    height: 700px;
+}

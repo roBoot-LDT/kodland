@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block head %}
+    <title>Контакты</title>
+    <link rel="stylesheet" href= "/static/css/contacts.css">
+
+{% endblock %}
+
+{% block content %}
+<div class = 'contacts'>
+    <div> 
+    <p> Контактный телефон: +79861234321 </p>
+    <p> Адрес: Манежная ул., 2/10с2, Москва, Россия</p>
+    <p> График работы: круглосуточно, без выходных</p>
+    </div>
+    <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a href="https://yandex.ru/maps/213/moscow/?ll=37.613502%2C55.749688&utm_medium=mapframe&utm_source=maps&z=16" style="color:#eee;font-size:12px;position:absolute;top:14px;">Москва — Яндекс.Карты</a><iframe src="https://yandex.ru/map-widget/v1/-/CCUieSRT3D" width="560" height="400" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+</div>
+{% endblock %}
