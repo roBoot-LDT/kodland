@@ -68,5 +68,9 @@ def order():
                 return render_template('order.html', error='Не все поля заполнены!')
     return render_template('order.html')
 
+@app.route('/order_list')
+def order_list():
+    return render_template('order_list.html')
+    
 if __name__ == "__main__":
     app.run()
