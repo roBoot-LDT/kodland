@@ -59,10 +59,13 @@ def lootbox():
         chance = 1
     return render_template('lootbox.html', chance=chance)
 
-@app.route('/order',  methods=['GET', 'POST'])
+@app.route('/order', methods=['GET', 'POST'])
 def order():
     if request.method == 'POST':
-        print(request.form)
+        for key in request.form:
+            print(key, request.form[key])
+            if request.form[key] == '':
+                return render_template('order.html', error='Не все поля заполнены!')
     return render_template('order.html')
 
 if __name__ == "__main__":

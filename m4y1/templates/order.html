@@ -4,8 +4,9 @@
 {% endblock %}
 
 {% block content %}
-<form  action='/order' method='post'>
+<form action='/order' method='post'>
     <ul class="form">
+        {{error}}
         <li>
             <input type="text" name="name" placeholder="Имя">
         </li>
@@ -21,6 +22,8 @@
         <li>
             <input type="datetime-local" name="date" placeholder="Дата доставки">
         </li>
+        <li> <input type="text" name="feed-back" placeholder="Ваши пожелания"> 
+        </li> 
         <li>
             <select name="delivery_type">
                 <option value="Доставка на дом">Доставка на дом</option>
