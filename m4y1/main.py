@@ -99,6 +99,7 @@ def order():
 def order_list():
     return render_template('order_list.html')
     
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login = 'admin'
@@ -113,11 +114,9 @@ def login():
     return render_template('login.html')
 
 @app.route("/logout")
-@login_required
 def logout():
     logout_user()
-    return 'Пока'
-        
+    return "Пока!"
 
 if __name__ == "__main__":
     app.run()
