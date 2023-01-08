@@ -105,9 +105,6 @@ def order():
         for key in request.form:
             if request.form[key] == '':
                 return render_template('order.html', error='Не все поля заполнены!')
-            if key == 'email':
-                if not re.match('\\w+@\\w+\\.(ru|com)', request.form[key]):
-                    return render_template('order.html', error='Неправильный формат почты')
             if key == 'phone_number':
                 if not re.match('\\+7\\d{9}', request.form[key]):
                     return render_template('order.html', error='Неправильный формат номера телефона')
