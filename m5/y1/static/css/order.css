@@ -1,0 +1,26 @@
+.form {
+    text-align: center;
+    display: list-item;
+    list-style-type : none;
+    margin-top      : 1%;
+    padding         : 0;
+    overflow        : hidden;
+    background-color: transparent;
+}
+
+.form li {
+    float     : none;
+    margin-top: 15px;
+}
+
+.form li a {
+    display        : block;
+    color          : white;
+    text-align     : center;
+    padding        : 14px 16px;
+    text-decoration: none;
+}
+
+.form li a:hover {
+    background-color: none;
+}

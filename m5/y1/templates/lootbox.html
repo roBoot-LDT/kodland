@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block head %}
+    <title>Лутбокс страница</title>
+{% endblock %}
+
+{% block content %}
+ <div>
+    {% if chance == 50 %}
+        <p>Вам не повезло</p>
+    {% elif chance == 45 %}
+        <p>Выйгрыш</p>
+    {% elif chance == 4 %}
+        <p>Редкий выйгрыш</p>
+    {% else %}
+        <p>Очень редкий выйгрыш</p>
+    {% endif %}
+    <img src="../static/images/lootbox/{{chance}}.jpg">
+ </div>
+{% endblock %}

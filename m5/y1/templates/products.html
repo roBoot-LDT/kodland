@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% block head %}
+    <link rel="stylesheet" href= "/static/css/products.css">
+    <title>Продукты</title>
+{% endblock %}
+{% block content %}
+<table>
+  <tr>
+    <th>Наименование</th>
+    <th>Описание</th>
+    <th>Цена</th>
+    <th>Фото</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>Супер крутой товар</td>
+    <td>Это супер крутой товар, скорее покупай</td>
+    <td>50 руб</td>
+    <td><img src="static/images/2.jpg"  width="120" height="90" /></td>
+    <td><button>В корзину</button></td>
+  </tr>
+  <tr>
+    <td>Зубная щетка</td>
+    <td>Щетка для чистки зубов</td>
+    <td>94 руб</td>
+    <td><img src="static/images/1.jpg"  width="120" height="90" /></td>
+    <td><button>В корзину</button></td>
+  </tr>
+</table>
+{% endblock %}

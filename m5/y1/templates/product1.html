@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block head %}
+<title>Первый товар</title>
+<link rel="stylesheet" href="/static/css/prod.css">
+{% endblock %}
+
+{% block content %}
+<div>
+    {% if lucky_num == 5 %}
+    <img src="/static/images/python_kodland.jpg">
+    {% endif %}
+    <div class='text'>
+        <img src="/static/images/promotion.png" width="300" height="300">
+        <h1>Первый товар! {{action_name}}</h1>
+        <p> Один из лучших товаров, который вы можете приобрести у нас. Сейчас со скидкой 10%!</p>
+        <p> Только до конца недели: {{end_date}} </p>
+    </div>
+</div>
+{% endblock %}
