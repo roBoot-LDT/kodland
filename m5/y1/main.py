@@ -149,7 +149,9 @@ def register():
                 return render_template('register.html', message='Все поля должны быть заполнены!')
         if request.form['password'] != request.form['password_check']:
             return render_template('register.html', message='Пароли не совпадают')
-
+        row = db.users.get('login', request.form['login'])
+        if row:
+            return render_template('register.html', message='Такой пользователь уже существует!')
         data = dict(request.form)
         data.pop('password_check')
         db.users.put(data=data)
