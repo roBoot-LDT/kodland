@@ -3,7 +3,7 @@ from random import randint
 from datetime import datetime, timedelta
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
-
+#test
 app = Flask(__name__)
 
 all_orders = []
