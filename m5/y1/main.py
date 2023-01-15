@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
 from kodland_db import db
-#test
+
 app = Flask(__name__)
 
 all_orders = []
@@ -17,16 +17,13 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+@login_manager.user_loader
+def load_user(login):
+    return User(login)
 
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
-
-
-@login_manager.user_loader
-def load_user(login):
-    if login == 'admin':
-        return User(login)
 
 
 @app.route('/')
@@ -108,10 +105,12 @@ def order_list():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    login = 'admin'
-    password = 'admin'
     if request.method == 'POST':
-        if request.form['login'] == login and request.form['password'] == password:
+        row = db.users.get('login', request.form['login'])
+        if not row:
+            return render_template('login.html', error='Неправильный логин или пароль')
+
+        if request.form['password'] == row.password:
             user = User(login)  # Создаем пользователя
             login_user(user)  # Логинем пользователя
             return redirect(url_for('index'))
@@ -152,6 +151,10 @@ def register():
         row = db.users.get('login', request.form['login'])
         if row:
             return render_template('register.html', message='Такой пользователь уже существует!')
+        if row.email:
+            return render_template('register.html', message='Такая почта уже существует!')
+        if row.phone:
+            return render_template('register.html', message='Такой телефон уже существует!')
         data = dict(request.form)
         data.pop('password_check')
         db.users.put(data=data)
