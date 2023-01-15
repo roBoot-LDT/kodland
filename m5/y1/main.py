@@ -3,6 +3,7 @@ from random import randint
 from datetime import datetime, timedelta
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+from kodland_db import db
 #test
 app = Flask(__name__)
 
@@ -139,6 +140,22 @@ def lootbox():
     else:
         chance = 1
     return render_template('lootbox.html', chance=chance)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        for key in request.form:
+            if request.form[key] == '':
+                return render_template('register.html', message='Все поля должны быть заполнены!')
+        if request.form['password'] != request.form['password_check']:
+            return render_template('register.html', message='Пароли не совпадают')
+
+        data = dict(request.form)
+        data.pop('password_check')
+        db.users.put(data=data)
+        return render_template('register.html', message='Регистрация прошла успешно')   
+
+    return render_template('register.html')
 
 
 if __name__ == "__main__":
