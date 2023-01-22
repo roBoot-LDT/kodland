@@ -1,30 +1,21 @@
 {% extends 'index.html' %}
 {% block head %}
-    <link rel="stylesheet" href= "/static/css/products.css">
+    <link rel="stylesheet" href= "/static/css/products.css">1
     <title>Продукты</title>
 {% endblock %}
+
 {% block content %}
 <table>
+  {% for row in data %}
+  <form action="/products"  method='POST'>
   <tr>
-    <th>Наименование</th>
-    <th>Описание</th>
-    <th>Цена</th>
-    <th>Фото</th>
-    <th></th>
+    <input type="hidden" value="{{row.id}}" name='item_id'>
+    <td>{{row.name}}</td>
+    <td>{{row.description}}</td>
+    <td>{{row.price}} руб</td>
+    <td><img src="static/images/{{row.image}}"  width="120" height="90" /></td>
+    <td><button type="submit">В корзину</button></td>
   </tr>
-  <tr>
-    <td>Супер крутой товар</td>
-    <td>Это супер крутой товар, скорее покупай</td>
-    <td>50 руб</td>
-    <td><img src="static/images/2.jpg"  width="120" height="90" /></td>
-    <td><button>В корзину</button></td>
-  </tr>
-  <tr>
-    <td>Зубная щетка</td>
-    <td>Щетка для чистки зубов</td>
-    <td>94 руб</td>
-    <td><img src="static/images/1.jpg"  width="120" height="90" /></td>
-    <td><button>В корзину</button></td>
-  </tr>
-</table>
+  </form>
+  {% endfor %}
 {% endblock %}

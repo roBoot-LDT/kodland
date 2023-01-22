@@ -7,6 +7,8 @@ from kodland_db import db
 
 app = Flask(__name__)
 
+items = {"name": "test", "description": "1234", "image": "1.img", "price": 50}
+db.items.put(data=items)
 all_orders = []
 
 app.config.update(
@@ -25,17 +27,18 @@ class User(UserMixin):
     def __init__(self, id):
         self.id = id
 
-
 @app.route('/')
 @login_required
 def index():
     return render_template('index.html')
 
 
-@app.route('/products')
-@login_required
+@app.route('/products', methods=['GET', 'POST'])
 def products():
-    return render_template('products.html')
+    if request.method == 'POST':
+        print(request.form)
+    data = db.items.get_all()
+    return render_template('products.html', data=data)
 
 
 @app.route('/cart')
@@ -70,9 +73,8 @@ def product1():
 @app.route('/product2')
 @login_required
 def product2():
-    brands = ['Colla', 'Pepppssi', 'Orio', 'Macdak']
+    brands = ['Colla', 'Pepsi', 'Orio', 'Macdonalds']
     return render_template('product2.html', brands=brands)
-
 
 @app.route('/order', methods=['GET', 'POST'])
 @login_required
@@ -110,13 +112,15 @@ def login():
         if not row:
             return render_template('login.html', error='Неправильный логин или пароль')
 
+    
         if request.form['password'] == row.password:
-            user = User(login)  # Создаем пользователя
-            login_user(user)  # Логинем пользователя
+            user = User(login)             
+            login_user(user)  
             return redirect(url_for('index'))
         else:
             return render_template('login.html', error='Неправильный логин или пароль')
     return render_template('login.html')
+
 
 
 @app.route("/logout")
@@ -150,18 +154,12 @@ def register():
             return render_template('register.html', message='Пароли не совпадают')
         row = db.users.get('login', request.form['login'])
         if row:
-            return render_template('register.html', message='Такой пользователь уже существует!')
-        if row.email:
-            return render_template('register.html', message='Такая почта уже существует!')
-        if row.phone:
-            return render_template('register.html', message='Такой телефон уже существует!')
+            return render_template('register.html', message='Такой пользователь уже есть') 
         data = dict(request.form)
         data.pop('password_check')
         db.users.put(data=data)
-        return render_template('register.html', message='Регистрация прошла успешно')   
-
+        return render_template('register.html', message='Регистрация прошла успешно')
     return render_template('register.html')
-
 
 if __name__ == "__main__":
     app.run()
