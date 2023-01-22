@@ -36,7 +36,16 @@ def index():
 @app.route('/products', methods=['GET', 'POST'])
 def products():
     if request.method == 'POST':
-        print(request.form)
+        item_id = request.form['item_id']
+        row = db.cart.get('item_id', item_id)
+        if not row:
+            data = {'item_id':item_id, 'amount':1}
+            db.cart.put(data)
+        else:
+            data = {'item_id':item_id, 'amount':row.amount+1}
+            db.cart.delete('item_id', item_id)
+            db.cart.put(data)
+
     data = db.items.get_all()
     return render_template('products.html', data=data)
 
