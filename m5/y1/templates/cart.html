@@ -1,10 +1,31 @@
 {% extends 'index.html' %}
 {% block head %}
-    <title>Корзина</title>
-    <link rel="stylesheet" href= "/static/css/cart.css">
+<link rel="stylesheet" type="text/css" href="/static/css/cart.css">
+<link rel="stylesheet" type="text/css" href="/static/css/products.css">
 {% endblock %}
-
 {% block content %}
-<div class = "bg-image"> </div>
-<a class = "a1" href = "order.html"> Оформить заказ</a>
+{% if data %}
+<div>
+    <table class="styled-table">
+        <tr>
+            <th>Наименование</th>
+            <th>Описание</th>
+            <th>Цена</th>
+            <th>Кол-во</th>
+            <th>Итоговая цена</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{row.name}}</td>
+            <td>{{row.description}}</td>
+            <td>{{row.price}} руб</td>
+            <td>{{row.amount}} шт.</td>
+            <td>{{row.total}} руб</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <div class='bg-image'>
+    {% endif %}
+    </div>
 {% endblock %}

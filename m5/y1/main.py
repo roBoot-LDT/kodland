@@ -7,8 +7,8 @@ from kodland_db import db
 
 app = Flask(__name__)
 
-items = {"name": "test", "description": "1234", "image": "1.img", "price": 50}
-db.items.put(data=items)
+# items = {"name": "Классный продукт", "description": "Обязательно купи!!!", "image": "2.jpg", "price": 500}
+# db.items.put(data=items)
 all_orders = []
 
 app.config.update(
@@ -50,11 +50,33 @@ def products():
     return render_template('products.html', data=data)
 
 
+# @app.route('/cart', methods=['GET', 'POST'])
+# def cart():
+    # if request.method == 'POST':
+    #     # Дополнительная логика
+    #     return redirect(url_for('order'))
+    # data = db.cart.get_all()
+    # total_sum = 0
+    # for row in data:
+    #     item_row = db.items.get('id', row.item_id)
+    #     row.name = item_row.name
+    #     row.description = item_row.description
+    #     row.price = item_row.price
+    #     row.total = row.amount * item_row.price
+    #     total_sum += row.total
+    # return render_template('cart.html', data=data, total_sum=total_sum)
 @app.route('/cart')
-@login_required
 def cart():
-    return render_template('cart.html')
-
+    data = db.cart.get_all() # id=1 amount=5
+    total_sum = 0
+    for row in data:
+        item_row = db.items.get('id', row.item_id) # Щётка Классная_Щётка 50
+        row.name = item_row.name
+        row.description = item_row.description
+        row.price = item_row.price
+        row.total = row.amount * item_row.price
+        total_sum += row.total
+    return render_template('cart.html', data=data, total_sum=total_sum)   
 
 @app.route('/contacts')
 @login_required
@@ -98,8 +120,19 @@ def order():
             if key == 'phone_number':
                 if not re.match('\+7\d{9}', request.form[key]):
                     return render_template('order.html', error='Неправильный формат номера телефона')
-            else:
-                all_orders.append(request.form)
+        
+        cart_data = db.cart.get_all()
+        order_data = db.orders.get_all()
+
+        id_ = order_data[-1].id + 1 if order_data else 1
+        for row in cart_data:
+            item = {'id': id_, 'item_id': row.item_id, 'amount': row.amount}
+            db.orders.put(item)
+
+        for row in cart_data:
+            db.cart.delete('item_id', row.item_id)
+        return redirect(url_for('cart'))
+
     return render_template('order.html')
 
 

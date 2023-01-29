@@ -19,3 +19,9 @@
     bottom: 30px;
     text-decoration: none;
 }
+
+.sum {
+    text-align: right;
+    margin-right: 10%;
+    font-weight: bold
+}
