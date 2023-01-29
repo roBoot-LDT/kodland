@@ -50,23 +50,10 @@ def products():
     return render_template('products.html', data=data)
 
 
-# @app.route('/cart', methods=['GET', 'POST'])
-# def cart():
-    # if request.method == 'POST':
-    #     # Дополнительная логика
-    #     return redirect(url_for('order'))
-    # data = db.cart.get_all()
-    # total_sum = 0
-    # for row in data:
-    #     item_row = db.items.get('id', row.item_id)
-    #     row.name = item_row.name
-    #     row.description = item_row.description
-    #     row.price = item_row.price
-    #     row.total = row.amount * item_row.price
-    #     total_sum += row.total
-    # return render_template('cart.html', data=data, total_sum=total_sum)
-@app.route('/cart')
+@app.route('/cart', methods=['GET', 'POST'])
 def cart():
+    if request.method == 'POST':
+        return redirect(url_for('order'))
     data = db.cart.get_all() 
     total_sum = 0
     for row in data:

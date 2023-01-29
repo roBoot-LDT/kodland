@@ -26,6 +26,11 @@
     </table>
     <div class="sum">
         Итоговая сумма: {{total_sum}} руб.
+        <form action="/cart" method="POST">
+            <div class="button">
+                <button type='submit'>Оформление заказа</button>
+            </div>
+        </form>
     </div>
     {% else %}
     <div class='bg-image'>
