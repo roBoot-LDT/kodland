@@ -2,6 +2,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 
+number = 0
 driver = webdriver.Chrome(ChromeDriverManager().install())
 driver.get("https://platform.kodland.org/")
 urls = ["https://platform.kodland.org/",
@@ -16,3 +17,8 @@ urls = ["https://platform.kodland.org/",
 for i in urls:
     driver.get(i)
     time.sleep(2)
+    page = driver.page_source
+    file_ = open(f'page{number}.html', 'w', encoding='utf-8')
+    file_.write(page)
+    file_.close()
+    number += 1
