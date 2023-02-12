@@ -4,7 +4,6 @@ import time
 
 number = 0
 driver = webdriver.Chrome(ChromeDriverManager().install())
-driver.get("https://platform.kodland.org/")
 urls = ["https://platform.kodland.org/",
          "http://www.python.org",
            "https://binarypiano.com/",
