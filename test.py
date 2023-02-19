@@ -1,23 +1,18 @@
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-import time
+from bs4 import BeautifulSoup
 
-number = 0
-driver = webdriver.Chrome(ChromeDriverManager().install())
-urls = ["https://platform.kodland.org/",
-         "http://www.python.org",
-           "https://binarypiano.com/",
-             "http://corndog.io/",
-               "https://longdogechallenge.com/",
-                 "https://checkbox.toys/scale/",
-                 "https://onesquareminesweeper.com/",
-                   "https://puginarug.com/",
-                     "https://paint.toys/calligram/"]
-for i in urls:
-    driver.get(i)
-    time.sleep(2)
-    page = driver.page_source
-    file_ = open(f'page{number}.html', 'w', encoding='utf-8')
-    file_.write(page)
-    file_.close()
-    number += 1
+html_doc = """
+<html><head><title>История моей жизни</title></head>
+<body>
+<p class="title"><b>История моей жизни</b></p>
+
+<p class="story">У меня есть три сестры:
+<a href="http://example.com/vera" class="sister" id="link1">Вера</a>,
+<a href="http://example.com/nadjda" class="sister" id="link2">Надежда</a> and
+<a href="http://example.com/lubov" class="sister" id="link3">Любовь</a>;
+И все у них хорошо</p>
+
+<p class="story">...</p>
+"""
+
+soup = BeautifulSoup(html_doc, 'html.parser')
+print(soup.prettify())
