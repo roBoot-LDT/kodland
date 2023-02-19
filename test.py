@@ -1,18 +1,32 @@
 from bs4 import BeautifulSoup
 
 html_doc = """
-<html><head><title>История моей жизни</title></head>
+<html>
+
+<head>
+    <title>
+        example
+    </title>
+</head>
+
 <body>
-<p class="title"><b>История моей жизни</b></p>
+    <ul>
+        <li>Главная страница</li>
+        <li>Товары</li>
+        <li>Контакты</li>
+        <li>Корзина</li>
+    </ul>
+    <div>
+        <p>Информация о чем то тут..</p>
+        <p>И тут..</p>
+    </div>
+    <div>
+        <input type="text" placeholder="Напиши" class="input-form">
+    </div>
+</body>
 
-<p class="story">У меня есть три сестры:
-<a href="http://example.com/vera" class="sister" id="link1">Вера</a>,
-<a href="http://example.com/nadjda" class="sister" id="link2">Надежда</a> and
-<a href="http://example.com/lubov" class="sister" id="link3">Любовь</a>;
-И все у них хорошо</p>
-
-<p class="story">...</p>
+</html>
 """
 
 soup = BeautifulSoup(html_doc, 'html.parser')
-print(soup.prettify())
+print(soup.find(class_='input-form'))
