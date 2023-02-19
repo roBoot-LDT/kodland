@@ -28,5 +28,9 @@ html_doc = """
 </html>
 """
 
-soup = BeautifulSoup(html_doc, 'html.parser')
-print(soup.find(class_='input-form'))
+soup = BeautifulSoup (html_doc, 'html.parser')
+
+
+
+for link in soup.find_all('li'):
+    print(link.text)
