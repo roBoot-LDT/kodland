@@ -1,16 +1,13 @@
-# Игра Shmup - 4 часть
-# Графика
 import pygame
 import random
 from os import path
 
 img_dir = path.join(path.dirname(__file__), 'img')
 
-WIDTH = 480
-HEIGHT = 600
+WIDTH = 480 
+HEIGHT = 600 
 FPS = 60
 
-# Задаем цвета
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -18,12 +15,38 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 
-# Создаем игру и окно
+
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Shmup!")
 clock = pygame.time.Clock()
+
+
+class Button():
+	def __init__(self, x, y, image, scale):
+		width = image.get_width()
+		height = image.get_height()
+		self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
+		self.rect = self.image.get_rect()
+		self.rect.topleft = (x, y)
+		self.clicked = False
+
+	def draw(self, surface):
+		action = False
+		pos = pygame.mouse.get_pos()
+
+		if self.rect.collidepoint(pos):
+			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
+				self.clicked = True
+				action = True
+
+		if pygame.mouse.get_pressed()[0] == 0:
+			self.clicked = False
+
+		surface.blit(self.image, (self.rect.x, self.rect.y))
+
+		return action
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -92,7 +115,8 @@ background_rect = background.get_rect()
 player_img = pygame.image.load(path.join(img_dir, "playerShip1_orange.png")).convert()
 meteor_img = pygame.image.load(path.join(img_dir, "meteorBrown_med1.png")).convert()
 bullet_img = pygame.image.load(path.join(img_dir, "laserRed16.png")).convert()
-
+start_img = pygame.image.load('/home/roboot/kodland/kod/start_btn.png').convert_alpha()
+exit_img = pygame.image.load('/home/roboot/kodland/kod/exit_btn.png').convert_alpha()
 all_sprites = pygame.sprite.Group()
 mobs = pygame.sprite.Group()
 bullets = pygame.sprite.Group()
@@ -103,10 +127,28 @@ for i in range(8):
     all_sprites.add(m)
     mobs.add(m)
 
-# Цикл игры
+start_button = Button(10, 10, start_img, 0.3)
+exit_button = Button(400, 10, exit_img, 0.3)
+
+Start = False
+while not Start:
+    screen.fill(BLACK)
+    screen.blit(background, background_rect)
+    if start_button.draw(screen):
+        Start = True
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    pygame.display.update()
+
 running = True
 while running:
     clock.tick(FPS)
+    screen.fill(BLACK)
+    screen.blit(background, background_rect)
+    if exit_button.draw(screen):
+        running = False
+                
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -125,12 +167,10 @@ while running:
     hits = pygame.sprite.spritecollide(player, mobs, False)
     if hits:
         running = False
-
-    screen.fill(BLACK)
-    screen.blit(background, background_rect)
+  
     all_sprites.draw(screen)
     pygame.display.flip()
-
+    pygame.display.update()
 pygame.quit()
 
 if __name__ == "__main__":
