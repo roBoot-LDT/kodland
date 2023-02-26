@@ -12,4 +12,4 @@ table = soup.find('table', class_='wikitable').find('tbody')
 
 print(table.prettify())
 for link in table.find_all('a'):
-  print(link.get("title"))
+  print(link.get("title"))       
