@@ -5,10 +5,11 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
-
-for page in range(1, 101):
-  driver.get(f"https://nekdo.ru/page/{page}")
-  time.sleep(1)
+driver.get(f"https://nekdo.ru/page/2/")
+soup = BeautifulSoup(driver.page_source)
+for id in range(426780, 426820):
+  anec = soup.find('div', class_='text', id=id)
+  print(anec)
   
 
       
