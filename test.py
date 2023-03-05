@@ -1,25 +1,34 @@
-import time
 import pickle
-from selenium import webdriver
-from bs4 import BeautifulSoup
-from collections import defaultdict
-from webdriver_manager.chrome import ChromeDriverManager
+from discord.ext import commands
+from random import choice
+import discord
 
-driver = webdriver.Chrome(ChromeDriverManager().install())
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix='$', intents=intents)
 
-anecs = defaultdict(list)
-for i in range(1, 2):
-    url = f'https://nekdo.ru/kids/{i}/'
-    driver.get(url)
-    soup = BeautifulSoup(driver.page_source, features="lxml")
-    divs_text = soup.find_all('div', class_='text')
-    divs_meta = soup.find_all('div', class_='cat')
-    for div_text, div_meta in zip(divs_text, divs_meta):
-        a_tags = div_meta.find_all('a')
-        for a_tag in a_tags:
-            anecs[a_tag.text].append(div_text.text)
-    time.sleep(2)
+with open('/home/roboot/Downloads/anecs.pickle', 'rb') as f:
+    anecs = pickle.load(f)
 
-with open('anecs.pickle', 'wb') as f:
-    pickle.dump(anecs, f)
-21212
+
+@bot.command('cat')
+async def cat(ctx):
+    '''По команде $cat возвращает категории списком'''
+    await ctx.send('\n'.join(anecs.keys()))
+
+
+@bot.command('rand')
+async def rand(ctx):
+    '''По команде $rand возвращает случайный анекдот'''
+    cat = choice(list(anecs.keys()))
+    anec = choice(anecs[cat])
+    await ctx.send(anec)
+
+
+@bot.command('anek')
+async def anek(ctx, cat):
+    '''По команде $anek {категория} возвращает случайный анекдот из выбранной категории'''
+    anec = choice(anecs[cat])
+    await ctx.send(anec)
+
+
+bot.run('MTAyMDk0NTcwMDgxNDU5NDA0OA.GE7PkA.6bBmB5V_RC2eFDdC-DVwmsVj6sh4SvUy-I-SZQ')
