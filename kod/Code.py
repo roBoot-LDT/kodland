@@ -138,13 +138,13 @@ while not Start:
         Start = True
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            running = False   
     pygame.display.update()
 
 running = True
 while running:
     clock.tick(FPS)
-    screen.fill(BLACK)
+    screen.fill(BLACK)   
     screen.blit(background, background_rect)
     if exit_button.draw(screen):
         running = False

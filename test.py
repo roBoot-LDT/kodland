@@ -1,34 +1,20 @@
-import pickle
-from discord.ext import commands
-from random import choice
-import discord
+def number_squared(x):
+    return x**2
 
-intents = discord.Intents.all()
-bot = commands.Bot(command_prefix='$', intents=intents)
+############################## TEST ##########################
 
-with open('/home/roboot/Downloads/anecs.pickle', 'rb') as f:
-    anecs = pickle.load(f)
+def test_number_squared():
+    assert number_squared(1) == 1
+    assert number_squared(2) == 4
+    assert number_squared(3) == 9
+    assert number_squared(4) == 16
+    assert number_squared(5) == 25
+    assert number_squared(6) == 36
+    assert number_squared(7) == 49
+    assert number_squared(8) == 64
+    assert number_squared(9) == 81
+    assert number_squared(10) == 100
+    assert number_squared(11) == 121
+    assert number_squared(12) == 144
 
-
-@bot.command('cat')
-async def cat(ctx):
-    '''По команде $cat возвращает категории списком'''
-    await ctx.send('\n'.join(anecs.keys()))
-
-
-@bot.command('rand')
-async def rand(ctx):
-    '''По команде $rand возвращает случайный анекдот'''
-    cat = choice(list(anecs.keys()))
-    anec = choice(anecs[cat])
-    await ctx.send(anec)
-
-
-@bot.command('anek')
-async def anek(ctx, cat):
-    '''По команде $anek {категория} возвращает случайный анекдот из выбранной категории'''
-    anec = choice(anecs[cat])
-    await ctx.send(anec)
-
-
-bot.run('MTAyMDk0NTcwMDgxNDU5NDA0OA.GE7PkA.6bBmB5V_RC2eFDdC-DVwmsVj6sh4SvUy-I-SZQ')
+        
