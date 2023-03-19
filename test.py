@@ -9,4 +9,11 @@ time.sleep(1)
 
 login = driver.find_element(By.NAME, 'login')
 login.send_keys('admin')
+
+password = driver.find_element(By.NAME, "password")
+password.send_keys("admin")
+
+button = driver.find_element(By.TAG_NAME, 'button')
+button.click()
+
 time.sleep(4)
