@@ -1,19 +1,21 @@
 import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
-driver.get("http://127.0.0.1:5000/contacts")
-time.sleep(1)
+driver.get("http://127.0.0.1:5000/")
 
 login = driver.find_element(By.NAME, 'login')
-login.send_keys('admin')
-
-password = driver.find_element(By.NAME, "password")
-password.send_keys("admin")
-
+password = driver.find_element(By.NAME,'password')
 button = driver.find_element(By.TAG_NAME, 'button')
-button.click()
 
-time.sleep(4)
+login.send_keys('admin')
+time.sleep(1)
+password.send_keys('admin')
+time.sleep(1)
+button.click()
+time.sleep(1)
+contacts = driver.find_element(By.NAME, 'contacts')
+contacts.click()
+time.sleep(3)
