@@ -18,8 +18,13 @@ for info_tag in info_tags:
     data.append(info_tag.text)
 
 like, comment, share, stars, views = data
-like = f"Лайки: {like}"
-comment = f"Коментарии: {comment}"
-share = f"Репосты: {share}"
+like = f"Лайки: {like} |"
+comment = f"Коментарии: {comment} |"
+share = f"Репосты: {share} |"   
+stars = f"Звёзды: {stars} |"   
+views = f"Просмотры: {views} |"   
 
-print(project_name, like, comment, share)
+          
+print("#"*150+"\n")
+print(project_name +" |", like, comment, share, stars, views +"\n")
+print("#"*150+"\n")
