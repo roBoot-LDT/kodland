@@ -1,19 +1,14 @@
 import time
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
+
 driver = webdriver.Chrome(ChromeDriverManager().install())
-driver.get("https://platform.kodland.org/auth/")
 
-time.sleep(1)
-login = driver.find_element(By.NAME, 'login')
-password = driver.find_element(By.NAME, 'password')
- 
-button = driver.find_element(By.TAG_NAME, 'button')
+project_id = input('Пожалуйста введите project ID: ')
+driver.get(f"https://hub.kodland.org/ru/project/{project_id}")
+time.sleep(10)
 
-login.send_keys('fmuhin5')
-time.sleep(1)
-password.send_keys('EwfyIgtC0v')
-time.sleep(1)
-button.click()
-time.sleep(2)
+soup = BeautifulSoup(driver.page_source, features="lxml")
+project_name = soup.find('h3', class_='post-title pt-3 pr-3').text
+info_tags = soup.find_all('span', class_='stat__number')
