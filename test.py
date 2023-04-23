@@ -1,9 +1,10 @@
 import discord
 import requests
 
-client = discord.Client()
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
 
-TOKEN = 'ТОКЕН'
+TOKEN = ''
 API_URL = 'https://7015.deeppavlov.ai/model'
 
 
@@ -16,12 +17,12 @@ def request_sentiment(message):
 
 @client.event
 async def on_message(message):
-    # В случае, если автором сообщения является бот,
-    # мы не отвечаем. Иначе бот будет разговаривать сам с собой
+
     if message.author == client.user:
         return
 
     setiment = request_sentiment(message.content)
-    await message.channel.send(setiment)
+    if setiment == "negative":
+        await message.channel.send('Bad')
 
 client.run(TOKEN)
