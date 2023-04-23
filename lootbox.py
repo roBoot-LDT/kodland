@@ -12,12 +12,6 @@ temp_points = 0
 @bot.command('show')
 async def show(ctx):
     global points
-    await ctx.send(f'Набранное кол-во очков {points}')
-
-
-@bot.command('show')
-async def show(ctx):
-    global points
     number = randint(0, 10)
     if number > 7:
         points *= 2
@@ -82,4 +76,4 @@ async def twenty_one(ctx, end=None):
     await ctx.send(f'Кол-во очков набрано {temp_points}')
 
 
-bot.run('TOKEN')
+bot.run('MTAyMDk0NTcwMDgxNDU5NDA0OA.G1-RVl.scgDJrYE1RCa3eHLZcFQcz_Vkh6x8Qk7t7l4Xg')
