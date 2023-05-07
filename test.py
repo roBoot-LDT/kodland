@@ -1,25 +1,37 @@
-import discord
+import requests
+from bs4 import BeautifulSoup
+import time
+while True:
+    search_term = input("Введите термин для поиска:")
 
-# Переменная intents - хранит привилегии бота
-intents = discord.Intents.default()
-# Включаем привелегию на чтение сообщений
-intents.message_content = True
-# Создаем бота в переменной client и передаем все привелегии
-client = discord.Client(intents=intents)
+    url = f"https://ru.wikipedia.org/wiki/{search_term}"
 
-@client.event
-async def on_ready():
-    print(f'We have logged in as {client.user}')
+    response = requests.get(url)
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-    if message.content.startswith('$hello'):
-        await message.channel.send("Hi!")
-    elif message.content.startswith('$bye'):
-        await message.channel.send("\\U0001f642")
+    if response.status_code != 200:
+        print(f"Страница для запроса '{search_term}' не найдена.")
     else:
-        await message.channel.send(message.content)
+        soup = BeautifulSoup(response.text, "html.parser")
 
-client.run("ТУТ ДОЛЖЕН БЫТЬ TOKEN ТВОЕГО БОТА")
+        title = soup.find("h1", {"class": "firstHeading"}).text
+        paragraphs = soup.find_all("p")
+
+        for data in paragraphs:
+            if search_term in data.text:
+                print(data.text)
+                break
+        # first_paragraph = None
+        # if len(paragraphs) > 0:
+        #     first_paragraph = paragraphs[0].text
+
+        # print("Заголовок страницы:")
+        # for letter in title:
+        #     print(letter, end="", flush=True)
+        #     time.sleep(0.02)
+        # print("\nКраткая справка:")
+        # if first_paragraph is not None:
+        #     for letter in first_paragraph:
+        #         print(letter, end="", flush=True)
+        #         time.sleep(0.02)
+        # else:
+        #     print("Абзацы на странице не найдены.")
