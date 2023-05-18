@@ -1,78 +1,19 @@
-s = input("WRITE DOWN THIS SHIT: ")
-levels = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M":1000}
-answer = 0
-skipIteration = False
-for number in range(len(s)):
-    if not skipIteration:
-        if number == len(s) - 1:
-            answer += levels[s[number]]
-        elif levels[s[number]] < levels[s[number+1]]:
-            answer += levels[s[number+1]] - levels[s[number]]
-            skipIteration = True
+
+def twoSum(nums, target):
+    if len(nums) == 2:
+         return [0, 1]
+    for first in nums:
+        if first >= target:
+            continue
         else:
-            answer += levels[s[number]]
-    else:
-        skipIteration = False
-        continue
-
-print(answer)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# maxLevel = levels[s[0]]
-# answer = maxLevel
-# firstIteration = True
-# for number in range(1, len(s)): #III
-#     if firstIteration:
-#         if levels[s[number]] > maxLevel:
-#             answer += levels[s[number]] - (2*maxLevel)
-#             firstIteration = False
-#         else:
-#             answer += levels[s[number]]
-#             firstIteration = False
-
-
-#     elif levels[s[number]] > maxLevel:
-#         answer += levels[s[number]] - maxLevel
-#     else:
-#         answer += levels[s[number]]
-
-# print(answer)
+            answer = [nums.index(first)]
+            for second in nums:
+                if second >= target or nums.index(first) == nums.index(second):
+                        continue
+                else:
+                     if second + first == target:
+                          answer.append(nums.index(second))
+                          return answer
+print(twoSum([2, 7, 11, 15, 16, 17], 9))
+print(twoSum([3,2,4], 6))
+print(twoSum([3,3], 6))
