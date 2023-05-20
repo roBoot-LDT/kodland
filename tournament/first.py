@@ -17,8 +17,7 @@
 import time
 class Solution:
     def containsDuplicate(self, nums: list[int]):
-        check = set(nums)
-        return False if len(check) == len(nums) else True
+        return
 
 
 
