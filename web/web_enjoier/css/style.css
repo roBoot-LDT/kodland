@@ -13,12 +13,17 @@ body {
     font:36px;
     color:white;
     font-family: 'Jost', sans-serif;
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start
 }
 
 .name{
     font:30px;
     color:white;
     font-family: 'Jost', sans-serif;
+    justify-content:flex-start;
+    align-items:flex-start
 }
 
 .nav{
