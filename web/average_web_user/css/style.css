@@ -3,8 +3,9 @@ body {
     font-size: 11px; /* Размер основного шрифта в <p></p>  */
     background-color: #fafafa; /* Цвет фона веб-страницы */
     color: #804444; /* Цвет основного текста */ 
+    
 }
-h1 {
+h1:hover {
     color: #3f6e3f; /* Цвет заголовка */
     font-size: 40px; /* Размер шрифта в пунктах */
     font-family: Georgia, serif; /* Семейство шрифтов */
