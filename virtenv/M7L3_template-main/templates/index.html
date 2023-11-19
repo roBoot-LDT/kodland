@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <title>Дневник программиста</title>
+</head>
+<body>
+  <header class="header">
+    <img src="../static/img/logo.svg" alt="logo" width="30" height="30">
+    <ul class="main-list">
+        <li class="list__item">
+          <a href="">
+            <img src="../static/img/login.svg" alt="login" width="20" height="20">
+          </a>
+    </ul>
+  </header>
+  <main>
+    {% block content %}
+    <h1 class="main__title">Мои записи</h1>
+    <ul class="cards-list">
+      {% for el in cards%}
+      <li class="card">
+        <a class="card__link" href="/card/{{el.id}}">
+          <img class="card__img" src="../static/img/post_icon.png" width="250" height="250" alt="post_icon">
+          <div class="card__text">
+            <h2 class="card__title">{{el.title}}</h2>
+            <p class="card__subtitle">{{el.subtitle}}</p>
+          </div>
+        </a>
+      </li>
+      {% endfor %}
+      <li class="card card--creat">
+          <a class="creat__link" href="{{url_for('create')}}"></a>
+      </li>
+    </ul>
+    {% endblock %}
+  </main>
+  <footer>
+
+  </footer>
+</body>
+</html>
